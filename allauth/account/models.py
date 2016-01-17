@@ -22,7 +22,8 @@ from .adapter import get_adapter
 class EmailAddress(models.Model):
 
     user = models.ForeignKey(allauth_app_settings.USER_MODEL,
-                             verbose_name=_('user'))
+                             verbose_name=_('user'),
+                             on_delete=models.CASCADE)
     email = models.EmailField(unique=app_settings.UNIQUE_EMAIL,
                               max_length=254,
                               verbose_name=_('e-mail address'))
@@ -81,7 +82,8 @@ class EmailAddress(models.Model):
 class EmailConfirmation(models.Model):
 
     email_address = models.ForeignKey(EmailAddress,
-                                      verbose_name=_('e-mail address'))
+                                      verbose_name=_('e-mail address'),
+                                      on_delete=models.CASCADE)
     created = models.DateTimeField(verbose_name=_('created'),
                                    default=timezone.now)
     sent = models.DateTimeField(verbose_name=_('sent'), null=True)
